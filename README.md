@@ -10,3 +10,8 @@ In this project we will utilize a kalman filter to estimate the state of a movin
 3. Compile: `cmake .. && make` 
    * On windows, you may need to run: `cmake .. -G "Unix Makefiles" && make`
 4. Run it: `./ExtendedKF `
+
+
+Final values after  499 steps: 
+
+![alt text](https://github.com/superbug7/Sensor-fusion/blob/master/data/kalman_term2.JPG)
