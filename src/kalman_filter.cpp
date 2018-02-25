@@ -49,13 +49,24 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
  
         double c1 = sqrt(px*px + py*py);
 	double c2 = atan2(py, px);
-	double c3 = (px*vx + py*vy) / c2;
+	double c3 = (px*vx + py*vy) / c1;
 	VectorXd h = VectorXd(3);
 	h << c1, c2, c3;
 
         int size_x = x_.size();
 	MatrixXd I = MatrixXd::Identity(size_x,size_x);
 	VectorXd y = z - h;
+	while ( y(1) > M_PI || y(1) < -M_PI ) {
+    		if ( y(1) > M_PI )
+        	{
+            		y(1) -= M_PI;
+       		}
+		else
+        	{
+			y(1) += M_PI;
+		}
+
+  }
 	MatrixXd Ht = H_.transpose();
 	MatrixXd S = H_ * P_ * Ht + R_;
 	MatrixXd Si = S.inverse();
